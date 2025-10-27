@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Manrope } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "next-themes";
+import { ThemeToggle } from "./components/ThemeToggle";
+import { TagsProvider } from "./context/TagsContext";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const manropeFont = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -23,11 +22,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={` ${manropeFont.variable} antialiased bg-(--color-Neutral-100) dark:bg-(--color-Neutral-900)`}
       >
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <TagsProvider>{children}</TagsProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
