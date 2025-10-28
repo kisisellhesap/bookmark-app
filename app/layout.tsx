@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import { ThemeToggle } from "./components/ThemeToggle";
 import { TagsProvider } from "./context/TagsContext";
 
 const manropeFont = Manrope({
@@ -24,9 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={` ${manropeFont.variable} antialiased bg-(--color-Neutral-100) dark:bg-(--color-Neutral-900)`}
+        className={` ${manropeFont.variable} antialiased bg-Neutral-100 dark:bg-Neutral-900-d`}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <TagsProvider>{children}</TagsProvider>
         </ThemeProvider>
       </body>

@@ -1,15 +1,17 @@
 import { JSX } from "react";
+import { ThemeToggle } from "./ThemeToggle";
 interface ButtonProps {
   text: string;
   type: "submit" | "reset" | "button";
   icon?: JSX.Element;
-  customStyle?: string | undefined;
+  customStyle?: string;
+  onClick?: () => void;
 }
-const Button = ({ text, type, icon, customStyle }: ButtonProps) => {
+const Button = ({ text, type, icon, customStyle, onClick }: ButtonProps) => {
   return (
-    <button type={type} className={`btns`}>
-      {icon}
-      <span>{text} </span>
+    <button type={type} className={`btn ${customStyle}`} onClick={onClick}>
+      {icon && icon}
+      <span className="">{text}</span>
     </button>
   );
 };
