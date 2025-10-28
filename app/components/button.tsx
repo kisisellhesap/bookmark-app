@@ -1,5 +1,4 @@
 import { JSX } from "react";
-import { ThemeToggle } from "./ThemeToggle";
 interface ButtonProps {
   text: string;
   type: "submit" | "reset" | "button";

@@ -1,9 +1,20 @@
+"use client";
+import { useAside } from "@/app/context/AsideContext";
 import RightContent from "./right-content";
 import SearchContent from "./search-content";
+import { RxHamburgerMenu } from "react-icons/rx";
+import OpenBtn from "../../open-btn";
 
 const Header = () => {
+  const { setAsideIsActive } = useAside();
+
   return (
-    <header className="px-8 py-4  bg-Neutral-0 dark:bg-Neutral-800-d flex items-center justify-between">
+    <header className="px-8 py-4  bg-Neutral-0 dark:bg-Neutral-800-d flex items-center gap-5">
+      <OpenBtn
+        icon={<RxHamburgerMenu className="icon-size" />}
+        onClick={() => setAsideIsActive(true)}
+        responsive="lg:hidden"
+      />
       <SearchContent />
       <RightContent />
     </header>

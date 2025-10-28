@@ -24,7 +24,7 @@ const ProfileMenu = ({ dropdown }: ProfileMenuProps) => {
               alt="image-avatar"
               width={40}
               height={40}
-              className=" radius-full"
+              className="radius-full"
             />
             <div className="flex flex-col">
               <p className="text-preset-4 text-Neutral-900 dark:text-Neutral-0-d">
@@ -35,7 +35,7 @@ const ProfileMenu = ({ dropdown }: ProfileMenuProps) => {
               </p>
             </div>
           </div>
-          <div className="px-4 py-3 border-b border-b-Neutral-100 dark:border-b-Neutral-500-d flex items-center gap-2.5">
+          <div className="px-4 py-3 border-b border-b-Neutral-100 dark:border-b-Neutral-500-d flex items-center gap-2.5 text-Neutral-800 dark:text-Neutral-0-d">
             <IoColorPaletteOutline className="icon-size" />
             <span className="text-preset-4-medium">Theme</span>
             <ThemeToggle />
@@ -46,7 +46,7 @@ const ProfileMenu = ({ dropdown }: ProfileMenuProps) => {
               type="button"
               text="Logout"
               icon={<LuLogOut className="icon-size" />}
-              customStyle="btn-dropdown text-preset-4-medium p-2"
+              customStyle="btn-dropdown text-preset-4-medium p-2 outline-0"
             />
           </div>
         </motion.div>
