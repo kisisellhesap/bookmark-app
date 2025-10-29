@@ -1,4 +1,4 @@
-import { useTags } from "@/app/context/TagsContext";
+import { useFilter } from "@/app/context/FilterContext";
 import { AsideTag } from "@/app/types";
 import { FaCheck } from "react-icons/fa";
 
@@ -6,7 +6,7 @@ interface TagBtnProps {
   tag: AsideTag;
 }
 const TagBtn = ({ tag }: TagBtnProps) => {
-  const { toggleTag } = useTags();
+  const { toggleTag } = useFilter();
 
   return (
     <div

@@ -16,7 +16,7 @@ const ProfileMenu = ({ dropdown }: ProfileMenuProps) => {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: -5 }}
           transition={{ duration: 0.15, ease: "easeOut" }}
-          className="w-[248px] radius-8 absolute right-0 top-16 border border-Neutral-100 dark:border-Neutral-500-d bg-Neutral-0 dark:bg-Neutral-600-d flex flex-col "
+          className="w-[248px] radius-8 absolute right-0 top-16 shadow-1 border z-10 border-Neutral-100 dark:border-Neutral-500-d bg-Neutral-0 dark:bg-Neutral-600-d flex flex-col "
         >
           <div className="flex gap-3 items-center py-3 px-4 border-b border-b-Neutral-100 dark:border-b-Neutral-500-d">
             <Image

@@ -1,9 +1,9 @@
 "use client";
-import { useTags } from "@/app/context/TagsContext";
+import { useFilter } from "@/app/context/FilterContext";
 import TagBtn from "./tag-btn";
 
 const TagList = () => {
-  const { tags, resetTags } = useTags();
+  const { tags, resetTags } = useFilter();
   return (
     <div className="tag-wrapper px-4">
       <div className="flex justify-between items-center text-Neutral-500">

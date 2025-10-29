@@ -17,6 +17,7 @@ const AsideContext = createContext<AsideContextType | undefined>(undefined);
 
 export const AsideProvider = ({ children }: { children: ReactNode }) => {
   const [asideIsActive, setAsideIsActive] = useState<boolean>(false);
+
   return (
     <AsideContext.Provider value={{ asideIsActive, setAsideIsActive }}>
       {children}

@@ -4,7 +4,7 @@ import { LayoutProps } from "@/app/types";
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="flex bg-red-300 min-h-screen">
+    <div className="flex bg-Neutral-100 dark:bg-Neutral-900-d min-h-screen">
       <Aside />
       <div className="flex-1">
         <Header />

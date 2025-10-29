@@ -130,6 +130,9 @@
     @apply flex items-center cursor-pointer;
   }
 
+  .btn-filter {
+  }
+
   .btn-dropdown {
     @apply rounded-md  bg-transparent w-full gap-2.5 hover:bg-Neutral-100 dark:hover:bg-Neutral-500-d  text-Neutral-800 dark:text-Neutral-0-d;
   }
@@ -146,7 +149,7 @@
     @apply bg-Neutral-0 border border-Neutral-400 hover:bg-Neutral-100 text-Neutral-900;
   }
   .btn-secondary-sm-dark {
-    @apply bg-Neutral-800-d border border-Neutral-400-d hover:border-Neutral-500-d hover:bg-Neutral-600-d text-Neutral-0-d;
+    @apply dark:bg-Neutral-800-d border dark:border-Neutral-400-d dark:hover:border-Neutral-500-d dark:hover:bg-Neutral-600-d dark:text-Neutral-0-d;
   }
 }
 
