@@ -2,12 +2,16 @@ import Button from "@/app/components/button";
 import { ThemeToggle } from "@/app/components/ThemeToggle";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import { IoColorPaletteOutline } from "react-icons/io5";
 import { LuLogOut } from "react-icons/lu";
 interface ProfileMenuProps {
   dropdown: boolean;
 }
 const ProfileMenu = ({ dropdown }: ProfileMenuProps) => {
+  const handleLogout = () => {
+    redirect("/sign-in");
+  };
   return (
     <AnimatePresence>
       {dropdown && (
@@ -47,6 +51,7 @@ const ProfileMenu = ({ dropdown }: ProfileMenuProps) => {
               text="Logout"
               icon={<LuLogOut className="icon-size" />}
               customStyle="btn-dropdown text-preset-4-medium p-2 outline-0"
+              onClick={handleLogout}
             />
           </div>
         </motion.div>

@@ -4,11 +4,12 @@ import UserProfile from "@/app/components/userProfile";
 import { GoPlus } from "react-icons/go";
 import ProfileMenu from "../profile-menu";
 import { useEffect, useRef, useState } from "react";
+import { useModal } from "@/app/context/ModalContext";
 
 const RightContent = () => {
   const [dropdown, setDropDown] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
-
+  const { setType, setIsActive } = useModal();
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -26,12 +27,20 @@ const RightContent = () => {
     };
   }, []);
 
+  const handleAdd = () => {
+    setType("add");
+    setIsActive(true);
+  };
+
   return (
     <div
       className="flex items-center gap-4 relative ml-auto"
       ref={containerRef}
     >
-      <button className="btn btn-sm btn-primary-sm-light text-preset-3 custom-outline">
+      <button
+        className="btn btn-sm btn-primary-sm-light text-preset-3 custom-outline"
+        onClick={handleAdd}
+      >
         <GoPlus className="icon-size" />
         <span className="max-lg:hidden">Add Bookmark</span>
       </button>

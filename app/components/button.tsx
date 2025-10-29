@@ -2,7 +2,7 @@ import { JSX } from "react";
 import { FaCheck } from "react-icons/fa6";
 
 interface ButtonProps {
-  text: string;
+  text?: string;
   type: "submit" | "reset" | "button";
   icon?: JSX.Element;
   customStyle?: string;

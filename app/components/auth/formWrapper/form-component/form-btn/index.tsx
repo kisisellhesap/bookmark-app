@@ -1,3 +1,5 @@
+import { FormEvent, MouseEvent } from "react";
+
 interface FromBtnProps {
   text: string;
   type: "submit" | "reset" | "button";

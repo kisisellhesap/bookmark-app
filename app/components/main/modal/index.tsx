@@ -1,5 +1,6 @@
 import { useModal } from "@/app/context/ModalContext";
 import AreYouShureModal from "./areYouShure-modal";
+import AddEditModal from "./addEdit-modal";
 
 const Modal = () => {
   const { isActive, setIsActive, type } = useModal();
@@ -30,8 +31,18 @@ const Modal = () => {
           text="Move this bookmark back to your active list?"
           btnText="Unarchive"
         />
+      ) : type === "add" ? (
+        <AddEditModal
+          title="Add a Bookmark"
+          text="Save a link with details to keep your collection organized."
+          btnText="Add Bookmark"
+        />
       ) : type === "edit" ? (
-        ""
+        <AddEditModal
+          title="Edit bookmark"
+          text="Update your saved link details — change the title, description, URL, or tags anytime."
+          btnText="Save Bookmark"
+        />
       ) : (
         ""
       )}

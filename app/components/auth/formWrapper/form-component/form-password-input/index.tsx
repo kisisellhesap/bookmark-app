@@ -1,12 +1,18 @@
 "use client";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { FaMehRollingEyes } from "react-icons/fa";
 import { BsFillEmojiHeartEyesFill } from "react-icons/bs";
 
 interface FormPasswordInputProps {
   label: string;
+  name: string;
+  onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
-const FormPasswordInput = ({ label }: FormPasswordInputProps) => {
+const FormPasswordInput = ({
+  label,
+  name,
+  onChange,
+}: FormPasswordInputProps) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   return (
     <div className="flex flex-col gap-1.5 relative">
@@ -20,6 +26,8 @@ const FormPasswordInput = ({ label }: FormPasswordInputProps) => {
         required
         minLength={6}
         maxLength={15}
+        name={name}
+        onChange={onChange}
       />
 
       <button

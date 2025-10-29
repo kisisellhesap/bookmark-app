@@ -30,7 +30,7 @@ const AreYouShureModal = ({ title, text, btnText }: AreYouShureModalProps) => {
         </p>
       </div>
 
-      <div className="flex gap-8 self-end">
+      <div className="flex gap-4 self-end">
         <Button
           type="button"
           text="Cancel"

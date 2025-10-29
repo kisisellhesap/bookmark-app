@@ -42,19 +42,15 @@ const BookmarkDropdown = ({
         alert("Düzenleniyor...");
         break;
       case "Edit":
-        alert("Paylaşıldı!");
-
         setType("edit");
         setIsActive(true);
         break;
       case "Archive":
         setType("archive");
-
         setIsActive(true);
         break;
       case "Unarchive":
         setType("unarchive");
-
         setIsActive(true);
         break;
       case "Delete permanently":
