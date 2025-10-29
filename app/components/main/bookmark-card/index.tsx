@@ -75,7 +75,11 @@ const BookmarkCard = () => {
         </div>
       </div>
 
-      <BookmarkDropdown dropdown={dropdown} setDropDown={setDropDown} />
+      <BookmarkDropdown
+        dropdown={dropdown}
+        setDropDown={setDropDown}
+        copyUrl={"frontendmentor.io"}
+      />
     </div>
   );
 };

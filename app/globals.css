@@ -130,9 +130,6 @@
     @apply flex items-center cursor-pointer;
   }
 
-  .btn-filter {
-  }
-
   .btn-dropdown {
     @apply rounded-md  bg-transparent w-full gap-2.5 hover:bg-Neutral-100 dark:hover:bg-Neutral-500-d  text-Neutral-800 dark:text-Neutral-0-d;
   }
@@ -143,7 +140,7 @@
     @apply bg-Teal-700 hover:bg-Teal-800 text-Neutral-0 shadow-[inset_0px_1px_0px_1px_rgba(255,255,255,0.1)];
   }
   .btn-primary-sm-red {
-    @apply bg-Red-800  text-Neutral-0 shadow-[inset_0px_1px_0px_1px_rgba(255,255,255,0.1)];
+    @apply bg-Red-800 hover:bg-Red-600  text-Neutral-0 shadow-[inset_0px_1px_0px_1px_rgba(255,255,255,0.1)];
   }
   .btn-secondary-sm-light {
     @apply bg-Neutral-0 border border-Neutral-400 hover:bg-Neutral-100 text-Neutral-900;

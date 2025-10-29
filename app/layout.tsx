@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { AsideProvider } from "./context/AsideContext";
 import { FilterProvider } from "./context/FilterContext";
+import { ModalProvider } from "./context/ModalContext";
 
 const manropeFont = Manrope({
   variable: "--font-manrope",
@@ -28,7 +29,9 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <FilterProvider>
-            <AsideProvider>{children}</AsideProvider>
+            <AsideProvider>
+              <ModalProvider>{children}</ModalProvider>
+            </AsideProvider>
           </FilterProvider>
         </ThemeProvider>
       </body>

@@ -4,9 +4,11 @@ import RightContent from "./right-content";
 import SearchContent from "./search-content";
 import { RxHamburgerMenu } from "react-icons/rx";
 import OpenBtn from "../../open-btn";
+import { useModal } from "@/app/context/ModalContext";
 
 const Header = () => {
   const { setAsideIsActive } = useAside();
+  const { setIsActive } = useModal();
 
   return (
     <header className=" sticky top-0 shadow-1  z-10 px-8 py-4  bg-Neutral-0 dark:bg-Neutral-800-d flex items-center gap-5">
@@ -17,6 +19,8 @@ const Header = () => {
       />
       <SearchContent />
       <RightContent />
+
+      <button onClick={() => setIsActive(true)}>asdasd</button>
     </header>
   );
 };

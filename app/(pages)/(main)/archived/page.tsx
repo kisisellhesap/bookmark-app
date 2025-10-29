@@ -13,7 +13,9 @@ const Archived = () => {
       className="flex flex-col gap-5 px-8 pt-8 py-16"
     >
       <PageHeader title="Archived bookmarks" />
-      <BookmarkCard />
+      <div className=" grid grid-cols-[338px_338px_338px] gap-8 max-xl:grid-cols-2 max-md:grid-cols-1">
+        <BookmarkCard />
+      </div>
     </motion.div>
   );
 };

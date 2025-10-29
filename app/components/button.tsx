@@ -21,10 +21,11 @@ const Button = ({
     <button type={type} className={`btn ${customStyle}`} onClick={onClick}>
       {icon && icon}
       <span className="">{text}</span>
-
-      <span className="ml-auto">
-        {check && <FaCheck className="icon-size" />}
-      </span>
+      {check && (
+        <span className="ml-auto">
+          <FaCheck className="icon-size" />
+        </span>
+      )}
     </button>
   );
 };
