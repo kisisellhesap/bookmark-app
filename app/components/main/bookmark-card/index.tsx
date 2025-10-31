@@ -9,14 +9,12 @@ import { useState } from "react";
 import OpenBtn from "../../open-btn";
 import { Bookmark } from "@/app/types";
 import moment from "moment";
-import { Timestamp } from "firebase/firestore";
 
 interface BookmarkCardProps {
   bookmark: Bookmark;
 }
 const BookmarkCard = ({ bookmark }: BookmarkCardProps) => {
   const [dropdown, setDropDown] = useState<boolean>(false);
-  console.log(bookmark);
 
   return (
     <div className="bg-Neutral-0 dark:bg-Neutral-800-d radius-12 shadow-1  relative">
