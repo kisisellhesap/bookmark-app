@@ -14,21 +14,27 @@ import { useEffect, useState } from "react";
 const Home = () => {
   const { resetFilters } = useFilter();
   const [bookmarks, setBookmarks] = useState<Bookmark[] | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
     const getBookmark = async () => {
       const bookmarks = await getBookmarksMethod();
       const users = await getUsersMethod();
       const adminBookmarks = userIsAdmin(bookmarks, users);
       setBookmarks(adminBookmarks);
+      setLoading(false);
     };
     getBookmark();
+
     return () => {
+      getBookmark();
+
       resetFilters();
     };
   }, []);
 
   console.log(bookmarks, "bookmarks");
 
+  if (loading) return <div>loading</div>;
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
