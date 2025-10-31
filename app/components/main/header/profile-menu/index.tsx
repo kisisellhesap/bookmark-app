@@ -1,5 +1,6 @@
 import Button from "@/app/components/button";
 import { ThemeToggle } from "@/app/components/ThemeToggle";
+import { signOutMethod } from "@/app/firebase/auth";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { redirect } from "next/navigation";
@@ -10,7 +11,7 @@ interface ProfileMenuProps {
 }
 const ProfileMenu = ({ dropdown }: ProfileMenuProps) => {
   const handleLogout = () => {
-    redirect("/sign-in");
+    signOutMethod();
   };
   return (
     <AnimatePresence>

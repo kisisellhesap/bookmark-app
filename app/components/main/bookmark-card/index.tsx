@@ -7,16 +7,23 @@ import { MdAccessTime } from "react-icons/md";
 import BookmarkDropdown from "./bookmark-dropdown";
 import { useState } from "react";
 import OpenBtn from "../../open-btn";
+import { Bookmark } from "@/app/types";
+import moment from "moment";
+import { Timestamp } from "firebase/firestore";
 
-const BookmarkCard = () => {
+interface BookmarkCardProps {
+  bookmark: Bookmark;
+}
+const BookmarkCard = ({ bookmark }: BookmarkCardProps) => {
   const [dropdown, setDropDown] = useState<boolean>(false);
+  console.log(bookmark);
 
   return (
     <div className="bg-Neutral-0 dark:bg-Neutral-800-d radius-12 shadow-1  relative">
       <div className="flex flex-col gap-4 p-4">
         <div className="flex gap-3">
           <Image
-            src={"/images/favicon/favicon-frontend-mentor.png"}
+            src={bookmark.favicon}
             alt="img"
             width={44}
             height={44}
@@ -24,10 +31,10 @@ const BookmarkCard = () => {
           />
           <div className="flex flex-col">
             <p className="text-preset-2 text-Neutral-900 dark:text-Neutral-0-d">
-              Frontend Mentor
+              {bookmark.title}
             </p>
             <span className="text-preset-5 text-Neutral-800 dark:text-Neutral-100-d">
-              frontendmentor.io
+              {bookmark.url}
             </span>
           </div>
 
@@ -41,20 +48,17 @@ const BookmarkCard = () => {
         <hr className="text-Neutral-300 dark:text-Neutral-500-d h-px" />
 
         <p className="text-preset-4-medium text-Neutral-800 dark:text-Neutral-100-d">
-          Improve your front-end coding skills by building real projects. Solve
-          real-world HTML, CSS and JavaScript challenges whilst working to
-          professional designs.
+          {bookmark.description}.
         </p>
         <div className="flex gap-2 ">
-          <span className="px-2 py-0.5 radius-4 bg-Neutral-100 dark:bg-Neutral-600-d text-Neutral-800 dark:text-Neutral-100-d text-preset-5 shadow-1">
-            Practice
-          </span>
-          <span className="px-2 py-0.5 radius-4 bg-Neutral-100 dark:bg-Neutral-600-d text-Neutral-800 dark:text-Neutral-100-d text-preset-5 shadow-1">
-            Learning
-          </span>{" "}
-          <span className="px-2 py-0.5 radius-4 bg-Neutral-100 dark:bg-Neutral-600-d text-Neutral-800 dark:text-Neutral-100-d text-preset-5 shadow-1">
-            Community
-          </span>
+          {bookmark.tags.map((tag, i) => (
+            <span
+              key={i}
+              className="px-2 py-0.5 radius-4 bg-Neutral-100 dark:bg-Neutral-600-d text-Neutral-800 dark:text-Neutral-100-d text-preset-5 shadow-1"
+            >
+              {tag}
+            </span>
+          ))}
         </div>
       </div>
 
@@ -62,15 +66,20 @@ const BookmarkCard = () => {
         <div className="flex gap-4">
           <div className="flex gap-1.5 items-center text-Neutral-800 dark:text-Neutral-100-d">
             <MdOutlineRemoveRedEye className="w-3 h-3" />
-            <span className="text-preset-5">47</span>
+            <span className="text-preset-5">{bookmark.visitCount}</span>
           </div>
           <div className="flex gap-1.5 items-center text-Neutral-800 dark:text-Neutral-100-d">
-            <MdOutlineRemoveRedEye className="w-3 h-3" />
-            <span className="text-preset-5">47</span>
+            <MdAccessTime className="w-3 h-3" />
+
+            <span className="text-preset-5">
+              {moment(bookmark.lastVisited?.toDate()).format("DD MMM")}
+            </span>
           </div>
           <div className="flex gap-1.5 items-center text-Neutral-800 dark:text-Neutral-100-d">
-            <MdOutlineRemoveRedEye className="w-3 h-3" />
-            <span className="text-preset-5">47</span>
+            <CiCalendar className="w-3 h-3" />
+            <span className="text-preset-5">
+              {moment(bookmark.createdAt?.toDate()).format("DD MMM")}
+            </span>
           </div>
         </div>
       </div>

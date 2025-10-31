@@ -4,10 +4,11 @@ interface FormInputProps {
   label: string;
   type: string;
   name: string;
-  onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  length?: number;
+  onChange?: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
-const FormInput = ({ label, type, name, onChange }: FormInputProps) => {
+const FormInput = ({ label, type, name, length, onChange }: FormInputProps) => {
   return (
     <div className="flex flex-col gap-1.5">
       <label className="text-preset-4 text-Neutral-900 dark:text-Neutral-0-d">
@@ -24,7 +25,7 @@ const FormInput = ({ label, type, name, onChange }: FormInputProps) => {
             onChange={onChange}
           />
           <span className="text-Neutral-800 dark:text-Neutral-100-d text-preset-5 self-end">
-            0/280
+            {length}/280
           </span>
         </div>
       ) : (

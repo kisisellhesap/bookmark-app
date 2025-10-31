@@ -2,17 +2,32 @@
 import BookmarkCard from "@/app/components/main/bookmark-card";
 import PageHeader from "@/app/components/main/pageHeader";
 import { useFilter } from "@/app/context/FilterContext";
+import {
+  getBookmarksMethod,
+  getUsersMethod,
+  userIsAdmin,
+} from "@/app/firebase/auth";
+import { Bookmark } from "@/app/types";
 import { motion } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Home = () => {
   const { resetFilters } = useFilter();
+  const [bookmarks, setBookmarks] = useState<Bookmark[] | null>(null);
   useEffect(() => {
+    const getBookmark = async () => {
+      const bookmarks = await getBookmarksMethod();
+      const users = await getUsersMethod();
+      const adminBookmarks = userIsAdmin(bookmarks, users);
+      setBookmarks(adminBookmarks);
+    };
+    getBookmark();
     return () => {
-      console.log("Home sayfasından çıkılıyor");
       resetFilters();
     };
   }, []);
+
+  console.log(bookmarks, "bookmarks");
 
   return (
     <motion.div
@@ -25,14 +40,9 @@ const Home = () => {
       <PageHeader title="All bookmarks" />
 
       <div className=" grid grid-cols-[338px_338px_338px] gap-8 max-xl:grid-cols-2 max-md:grid-cols-1">
-        <BookmarkCard />
-        <BookmarkCard />
-        <BookmarkCard />
-        <BookmarkCard />
-        <BookmarkCard />
-        <BookmarkCard />
-        <BookmarkCard />
-        <BookmarkCard />
+        {bookmarks?.map((bookmark, i) => (
+          <BookmarkCard key={i} bookmark={bookmark} />
+        ))}
       </div>
     </motion.div>
   );

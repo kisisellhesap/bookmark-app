@@ -1,11 +1,15 @@
 import { useFilter } from "@/app/context/FilterContext";
 import Button from "../../button";
 import { FaXmark } from "react-icons/fa6";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
+import { Bookmark } from "@/app/types";
 
-const ModalTags = () => {
+interface ModalTagsProps {
+  activeTags: string[];
+  setActiveTags: Dispatch<SetStateAction<string[]>>;
+}
+const ModalTags = ({ activeTags, setActiveTags }: ModalTagsProps) => {
   const { tags } = useFilter();
-  const [activeTags, setActiveTags] = useState<string[]>([]);
 
   const handleAddTag = (item: string) => {
     if (!activeTags.includes(item)) {
@@ -22,7 +26,6 @@ const ModalTags = () => {
     setActiveTags([]);
   };
 
-  console.log(activeTags);
   return (
     <div className="flex flex-col gap-1.5">
       <div className="flex flex-col gap-1.5">
@@ -39,9 +42,15 @@ const ModalTags = () => {
           </button>
         </div>
 
-        <div className=" flex gap-2 radius-8 p-2 overflow-x-auto h-11">
+        <div className=" flex gap-2 radius-8 py-4 overflow-x-auto">
           {activeTags.length === 0 ? (
-            <span className=" px-2 py-1 radius-4 bg-Neutral-100 dark:bg-Neutral-600-d text-Neutral-800 dark:text-Neutral-100-d text-preset-5 shadow-1 ">
+            <span
+              className={` px-2 py-1 radius-4  text-preset-5 shadow-1 ${
+                activeTags.length === 0
+                  ? "bg-Red-600 text-Neutral-0"
+                  : "bg-Neutral-100 dark:bg-Neutral-600-d text-Neutral-800 dark:text-Neutral-100-d"
+              }`}
+            >
               Choose a tag
             </span>
           ) : (
@@ -67,7 +76,7 @@ const ModalTags = () => {
         </div>
       </div>
 
-      <div className="flex gap-2 flex-wrap h-20 overflow-y-scroll  p-2">
+      <div className="flex gap-2 flex-wrap">
         {tags.map((tag, i) => (
           <div
             key={i}

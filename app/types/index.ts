@@ -1,3 +1,4 @@
+import { Timestamp } from "firebase/firestore";
 import { JSX, ReactNode } from "react";
 
 export interface LayoutProps {
@@ -19,4 +20,31 @@ export interface SignUpTypeForm {
   fullname: string;
   email: string;
   password: string;
+}
+export interface SignInTypeForm {
+  email: string;
+  password: string;
+}
+
+export interface Bookmark {
+  uid: string;
+  title: string;
+  url: string;
+  favicon: string;
+  description: string;
+  tags: string[];
+  pinned: boolean;
+  isArchived: boolean;
+  visitCount: number;
+  createdAt: Timestamp | null;
+  lastVisited: Timestamp | null;
+  whoCreated: string | undefined;
+}
+
+export interface User {
+  uid: string;
+  displayName: string | null;
+  email: string | null;
+  photoURL: string | null;
+  role: "admin" | "user";
 }

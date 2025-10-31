@@ -1,6 +1,6 @@
 import SignInForm from "./sign-in-form";
 import SignUpForm from "./sign-up-form";
-import ForgetPasswordForm from "./forget-password-form";
+import ForgotPasswordForm from "./forgot-password-form";
 import ResetPasswordForm from "./reset-password-form";
 
 interface FormWrapperProps {
@@ -13,7 +13,7 @@ const FormWrapper = ({ type }: FormWrapperProps) => {
     case "sign-up":
       return <SignUpForm />;
     case "forgot-password":
-      return <ForgetPasswordForm />;
+      return <ForgotPasswordForm />;
     case "reset-password":
       return <ResetPasswordForm />;
   }

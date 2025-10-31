@@ -1,15 +1,8 @@
 "use client";
-import {
-  createContext,
-  useContext,
-  useState,
-  ReactNode,
-  useEffect,
-} from "react";
+import { createContext, useContext, useState, ReactNode } from "react";
 import { AsideTag } from "../types";
 import { tagsInitialState } from "../constant/tags";
 import { filterInitialState } from "../constant/sort-by-dropdown";
-import { usePathname } from "next/navigation";
 
 interface FilterContextType {
   tags: AsideTag[];
@@ -25,7 +18,6 @@ const FilterContext = createContext<FilterContextType | undefined>(undefined);
 export const FilterProvider = ({ children }: { children: ReactNode }) => {
   const [tags, setTags] = useState<AsideTag[]>(tagsInitialState);
   const [filters, setFilters] = useState<AsideTag[]>(filterInitialState);
-  const path = usePathname();
   const toggleTag = (text: string) => {
     setTags((prev) =>
       prev.map((tag) =>

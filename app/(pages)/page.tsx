@@ -1,13 +1,7 @@
-import { ThemeToggle } from "../components/ThemeToggle";
+import { redirect } from "next/navigation";
 
 const Page = async () => {
-  return (
-    <div>
-      <p className="">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis, est!
-      </p>
-    </div>
-  );
+  redirect("/sign-in");
 };
 
 export default Page;

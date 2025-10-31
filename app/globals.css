@@ -169,3 +169,30 @@
   cursor: pointer;
   border-radius: 100px;
 }
+.toast {
+  @apply flex items-center gap-2 px-3 py-10.5 rounded-lg  border;
+}
+
+.toast-error {
+  @apply border-Neutral-300 bg-Red-600  text-Neutral-0;
+}
+.toast-success-light {
+  @apply border-Neutral-300 bg-Neutral-0  text-Neutral-900;
+}
+html.dark .toast-success-dark {
+  @apply dark:bg-Neutral-500-d dark:border-Neutral-400-d dark:text-Neutral-0-d;
+}
+
+.toast-success-light-icon-color {
+  @apply text-Neutral-0;
+}
+html.dark .toast-success-light-icon-color {
+  @apply text-Neutral-500-d;
+}
+
+toast-success-light-icon-bg {
+  @apply bg-Neutral-500-d;
+}
+html.dark .toast-success-dark-icon-bg {
+  @apply bg-Neutral-0;
+}

@@ -7,6 +7,8 @@ import FormInput from "../form-component/form-input";
 import FormLinkText from "../form-component/form-link-text";
 import FormPasswordInput from "../form-component/form-password-input";
 import { SignUpTypeForm } from "@/app/types";
+import { signUpMethod } from "@/app/firebase/auth";
+import toast from "react-hot-toast";
 
 const SignUpForm = () => {
   const initialStateForm: SignUpTypeForm = {
@@ -24,12 +26,11 @@ const SignUpForm = () => {
     if (value !== "") {
       setForm({ ...form, [name]: value });
     }
-    console.log(value, name);
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(form);
+    signUpMethod(form);
   };
 
   return (

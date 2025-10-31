@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider, useTheme } from "next-themes";
 import { AsideProvider } from "./context/AsideContext";
 import { FilterProvider } from "./context/FilterContext";
 import { ModalProvider } from "./context/ModalContext";
+import { UserProvider } from "./context/UserContext";
+import toast, { Toaster } from "react-hot-toast";
+import ToastCustom from "./components/toastCustom";
 
 const manropeFont = Manrope({
   variable: "--font-manrope",
@@ -28,11 +31,14 @@ export default function RootLayout({
         className={` ${manropeFont.variable} antialiased bg-Neutral-100 dark:bg-Neutral-900-d`}
       >
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <FilterProvider>
-            <AsideProvider>
-              <ModalProvider>{children}</ModalProvider>
-            </AsideProvider>
-          </FilterProvider>
+          <UserProvider>
+            <FilterProvider>
+              <AsideProvider>
+                <ModalProvider>{children}</ModalProvider>
+                <ToastCustom />
+              </AsideProvider>
+            </FilterProvider>
+          </UserProvider>
         </ThemeProvider>
       </body>
     </html>
