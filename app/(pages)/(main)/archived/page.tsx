@@ -14,7 +14,7 @@ const Archived = () => {
     >
       <PageHeader title="Archived bookmarks" />
       <div className=" grid grid-cols-[338px_338px_338px] gap-8 max-xl:grid-cols-2 max-md:grid-cols-1">
-        <BookmarkCard />
+        {/* <BookmarkCard /> */}
       </div>
     </motion.div>
   );
