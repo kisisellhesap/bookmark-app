@@ -46,6 +46,7 @@ const SignUpForm = () => {
             type="text"
             name="fullname"
             onChange={(e) => handleChange(e)}
+            value={form.fullname}
           />
 
           <FormInput
@@ -53,6 +54,7 @@ const SignUpForm = () => {
             type="email"
             name="email"
             onChange={(e) => handleChange(e)}
+            value={form.email}
           />
           <FormPasswordInput
             label="Password *"

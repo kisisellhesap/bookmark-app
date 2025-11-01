@@ -34,6 +34,7 @@ const ForgotPasswordForm = () => {
             type="email"
             name="email"
             onChange={(e) => handleChange(e)}
+            value={email || ""}
           />
         </div>
 

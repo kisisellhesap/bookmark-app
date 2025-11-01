@@ -44,6 +44,7 @@ const SignInForm = () => {
             name="email"
             type="email"
             onChange={(e) => handleChange(e)}
+            value={form.email}
           />
           <FormPasswordInput
             label="Password"
