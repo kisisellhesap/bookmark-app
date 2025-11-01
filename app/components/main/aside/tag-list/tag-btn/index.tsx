@@ -14,7 +14,6 @@ const TagBtn = ({ tag }: TagBtnProps) => {
   const countTag = allBookmarks?.filter((bookmark) =>
     bookmark.tags.includes(tag.text)
   );
-  console.log(countTag);
 
   return (
     <div

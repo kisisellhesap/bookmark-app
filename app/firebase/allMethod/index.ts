@@ -6,13 +6,22 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth, db } from "..";
-import { Bookmark, SignInTypeForm, SignUpTypeForm, User } from "@/app/types";
+import {
+  Bookmark,
+  Form,
+  SignInTypeForm,
+  SignUpTypeForm,
+  User,
+} from "@/app/types";
 import toast from "react-hot-toast";
 import {
+  arrayRemove,
   arrayUnion,
   collection,
+  deleteDoc,
   doc,
   getDocs,
+  onSnapshot,
   setDoc,
   updateDoc,
 } from "firebase/firestore";
@@ -89,24 +98,26 @@ export const addBookmarkMethod = async (bookmark: Bookmark) => {
   }
 };
 
-export const getBookmarksMethod = async () => {
+export const getBookmarksMethod = (callback: (data: Bookmark[]) => void) => {
   const col = collection(db, "bookmarks");
-  const querySnapshot = await getDocs(col);
-  let temp: Bookmark[] = [];
-  let bookmark: Bookmark | null = null;
-  querySnapshot.forEach((doc) => {
-    // doc.data() is never undefined for query doc snapshots
-    bookmark = {
-      uid: doc.id,
-      ...doc.data(),
-    } as Bookmark;
 
-    temp.push(bookmark);
+  const unsubscribe = onSnapshot(col, (querySnapshot) => {
+    const temp: Bookmark[] = [];
+
+    querySnapshot.forEach((doc) => {
+      const bookmark = {
+        uid: doc.id,
+        ...doc.data(),
+      } as Bookmark;
+
+      temp.push(bookmark);
+    });
+
+    callback(temp);
   });
 
-  return temp;
+  return unsubscribe;
 };
-
 export const getUsersMethod = async () => {
   const col = collection(db, "users");
   const querySnapshot = await getDocs(col);
@@ -122,10 +133,10 @@ export const getUsersMethod = async () => {
   return temp;
 };
 
-export const userIsAdmin = (
-  bookmarks: Bookmark[],
-  users: User[]
-): Bookmark[] => {
+export const userIsAdmin = async (
+  bookmarks: Bookmark[]
+): Promise<Bookmark[]> => {
+  const users = await getUsersMethod();
   const adminUids = users
     .filter((user) => user.role === "admin")
     .map((user) => user.uid);
@@ -143,4 +154,32 @@ export const addArchiveMethod = async (bookmark: Bookmark, userId: string) => {
     isArchived: true,
     whoArchived: arrayUnion(userId),
   });
+};
+
+export const RemoveArchiveMethod = async (
+  bookmark: Bookmark,
+  userId: string
+) => {
+  const bookmarksRef = doc(db, "bookmarks", bookmark.uid);
+
+  await updateDoc(bookmarksRef, {
+    ...bookmark,
+    whoArchived: arrayRemove(userId),
+  });
+};
+
+export const editBookmarkMethod = async (bookmark: Bookmark) => {
+  const bookmarksRef = doc(db, "bookmarks", bookmark.uid);
+
+  // console.log(bookmark);
+  await updateDoc(bookmarksRef, {
+    title: bookmark.title,
+    description: bookmark.description,
+    url: bookmark.url,
+    tags: bookmark.tags,
+  });
+};
+
+export const deleteMethod = async (bookmark: Bookmark) => {
+  await deleteDoc(doc(db, "bookmarks", bookmark.uid));
 };

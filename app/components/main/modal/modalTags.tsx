@@ -3,13 +3,11 @@ import Button from "../../button";
 import { FaXmark } from "react-icons/fa6";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Bookmark } from "@/app/types";
+import { useModal } from "@/app/context/ModalContext";
 
-interface ModalTagsProps {
-  activeTags: string[];
-  setActiveTags: Dispatch<SetStateAction<string[]>>;
-}
-const ModalTags = ({ activeTags, setActiveTags }: ModalTagsProps) => {
+const ModalTags = () => {
   const { tags } = useFilter();
+  const { activeTags, setActiveTags } = useModal();
 
   const handleAddTag = (item: string) => {
     if (!activeTags.includes(item)) {

@@ -19,6 +19,7 @@ const AreYouShureModal = ({
   const { setIsActive } = useModal();
   const { setBookmark } = useBookmark();
 
+  console.log(onClick);
   return (
     <div
       className="p-6 radius-12 shadow-1 flex flex-col gap-6 bg-Neutral-0 dark:bg-Neutral-800-d relative w-full max-w-[450px]"

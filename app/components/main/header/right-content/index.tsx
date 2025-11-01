@@ -5,11 +5,14 @@ import { GoPlus } from "react-icons/go";
 import ProfileMenu from "../profile-menu";
 import { useEffect, useRef, useState } from "react";
 import { useModal } from "@/app/context/ModalContext";
+import { useBookmark } from "@/app/context/BookmarkContext";
 
 const RightContent = () => {
   const [dropdown, setDropDown] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const { setType, setIsActive } = useModal();
+  const { setBookmark } = useBookmark();
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -30,6 +33,7 @@ const RightContent = () => {
   const handleAdd = () => {
     setType("add");
     setIsActive(true);
+    setBookmark(null);
   };
 
   return (

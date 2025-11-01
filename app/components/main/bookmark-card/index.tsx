@@ -19,16 +19,20 @@ const BookmarkCard = ({ bookmark }: BookmarkCardProps) => {
   const { setBookmark } = useBookmark();
 
   return (
-    <div className="bg-Neutral-0 dark:bg-Neutral-800-d radius-12 shadow-1  flex flex-col relative">
+    <div className="bg-Neutral-0 dark:bg-Neutral-800-d radius-12 shadow-1 flex flex-col relative">
       <div className="flex flex-col gap-4  p-4 flex-1">
         <div className="flex gap-3">
-          <Image
-            src={bookmark.favicon}
-            alt="img"
-            width={44}
-            height={44}
-            className=" shadow-1 radius-full bg-Neutral-0 border-0 outline-2 -outline-offset-1 outline-Neutral-100 dark:outline-Neutral-500-d"
-          />
+          {bookmark.favicon ? (
+            <Image
+              src={bookmark.favicon}
+              alt="img"
+              width={44}
+              height={44}
+              className=" shadow-1 radius-full bg-Neutral-0 border-0 outline-2 -outline-offset-1 outline-Neutral-100 dark:outline-Neutral-500-d"
+            />
+          ) : (
+            <div className=" shadow-1 radius-full bg-Neutral-0 border-0 outline-2 -outline-offset-1 outline-Neutral-100 dark:outline-Neutral-500-d w-11 h-11"></div>
+          )}
           <div className="flex flex-col">
             <p className="text-preset-2 text-Neutral-900 dark:text-Neutral-0-d">
               {bookmark.title}
@@ -50,8 +54,8 @@ const BookmarkCard = ({ bookmark }: BookmarkCardProps) => {
 
         <hr className="text-Neutral-300 dark:text-Neutral-500-d h-px" />
 
-        <div className="flex flex-col gap-4  flex-1 justify-between">
-          <p className="text-preset-4-medium text-Neutral-800 dark:text-Neutral-100-d">
+        <div className="flex flex-col gap-4 flex-1 justify-between">
+          <p className="text-preset-4-medium text-Neutral-800 dark:text-Neutral-100-d h-full  break-all">
             {bookmark.description}
           </p>
           <div className="flex gap-2 ">

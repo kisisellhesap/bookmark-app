@@ -13,6 +13,8 @@ interface ModalContextType {
   setIsActive: Dispatch<SetStateAction<boolean>>;
   type: string | null;
   setType: Dispatch<SetStateAction<string | null>>;
+  activeTags: string[];
+  setActiveTags: Dispatch<SetStateAction<string[]>>;
 }
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
@@ -20,9 +22,19 @@ const ModalContext = createContext<ModalContextType | undefined>(undefined);
 export const ModalProvider = ({ children }: { children: ReactNode }) => {
   const [isActive, setIsActive] = useState<boolean>(false);
   const [type, setType] = useState<string | null>(null);
+  const [activeTags, setActiveTags] = useState<string[]>([]);
 
   return (
-    <ModalContext.Provider value={{ isActive, setIsActive, type, setType }}>
+    <ModalContext.Provider
+      value={{
+        isActive,
+        setIsActive,
+        type,
+        setType,
+        activeTags,
+        setActiveTags,
+      }}
+    >
       {children}
     </ModalContext.Provider>
   );

@@ -52,3 +52,10 @@ export interface User {
   photoURL: string | null;
   role: "admin" | "user";
 }
+
+export interface Form {
+  title: string;
+  url: string;
+  description: string;
+  tags: string[];
+}

@@ -14,6 +14,8 @@ import { BsArchive } from "react-icons/bs";
 import { IoIosRefresh } from "react-icons/io";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { auth } from "@/app/firebase";
+import { useBookmark } from "@/app/context/BookmarkContext";
+import { deleteMethod } from "@/app/firebase/allMethod";
 interface BookmarkDropdownProps {
   dropdown: boolean;
   setDropDown: Dispatch<SetStateAction<boolean>>;
@@ -25,7 +27,8 @@ const BookmarkDropdown = ({
   bookmark,
 }: BookmarkDropdownProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { setIsActive, setType } = useModal();
+  const { setIsActive, setType, setActiveTags } = useModal();
+  const { setBookmark } = useBookmark();
   const userUid = auth.currentUser?.uid ?? "";
 
   const forArchive = bookmark.whoArchived.includes(userUid);
@@ -49,6 +52,7 @@ const BookmarkDropdown = ({
   const handleEdit = () => {
     setType("edit");
     setIsActive(true);
+    setActiveTags(bookmark.tags);
   };
 
   const handleArchive = () => {
@@ -107,21 +111,7 @@ const BookmarkDropdown = ({
             onClick={() => handleCopy(bookmark.url)}
           />
 
-          {/* <Button
-            text={`${forPin ? "Unpin" : "Pin"}`}
-            type="button"
-            icon={
-              forPin ? (
-                <BsPinAngle className="w-4 h-4" />
-              ) : (
-                <BsPin className="w-4 h-4" />
-              )
-            }
-            customStyle="btn-dropdown text-preset-4-medium p-2 custom-outline"
-            onClick={handlePin}
-          /> */}
-
-          {userUid === bookmark.uid && (
+          {userUid === bookmark.whoCreated && (
             <Button
               text={"Edit"}
               type="button"
@@ -131,19 +121,21 @@ const BookmarkDropdown = ({
             />
           )}
 
-          <Button
-            text={`${forArchive ? "Unarchive" : "Archive"}`}
-            type="button"
-            icon={
-              forArchive ? (
-                <IoIosRefresh className="w-4 h-4" />
-              ) : (
-                <BsArchive className="w-4 h-4" />
-              )
-            }
-            customStyle="btn-dropdown text-preset-4-medium p-2 custom-outline"
-            onClick={handleArchive}
-          />
+          {auth.currentUser?.uid !== bookmark.whoCreated && (
+            <Button
+              text={`${forArchive ? "Unarchive" : "Archive"}`}
+              type="button"
+              icon={
+                forArchive ? (
+                  <IoIosRefresh className="w-4 h-4" />
+                ) : (
+                  <BsArchive className="w-4 h-4" />
+                )
+              }
+              customStyle="btn-dropdown text-preset-4-medium p-2 custom-outline"
+              onClick={handleArchive}
+            />
+          )}
 
           {bookmark.whoCreated === userUid && (
             <Button

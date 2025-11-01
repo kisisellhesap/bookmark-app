@@ -37,7 +37,7 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
   const [bookmarks, setBookmarks] = useState<Bookmark[] | null>(null);
   const [bookmark, setBookmark] = useState<Bookmark | null>(null);
   const { tags, searchInput } = useFilter();
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -55,24 +55,19 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
     const queryString = params.toString();
     router.replace(`?${queryString}`);
   }, [tags, searchInput]);
-  useEffect(() => {
-    const fetchInitialData = async () => {
-      setLoading(true);
-      try {
-        const bookmarks = await getBookmarksMethod();
-        const users = await getUsersMethod();
-        const adminBookmarks = userIsAdmin(bookmarks, users);
 
-        setAllBookmarks(adminBookmarks);
-        setBookmarks(adminBookmarks);
+  useEffect(() => {
+    const unsubscribe = getBookmarksMethod(async (bookmarks) => {
+      try {
+        setAllBookmarks(bookmarks);
       } catch (error) {
         console.error("Veri alınırken hata oluştu:", error);
       } finally {
-        setLoading(false);
       }
-    };
+    });
 
-    fetchInitialData();
+    // Cleanup: bileşen unmount olunca dinlemeyi durdur
+    return () => unsubscribe();
   }, []);
 
   useEffect(() => {
@@ -88,21 +83,20 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
       filtered = filtered.filter((bm) =>
         selectedTags.every((sel) => bm.tags.includes(sel.text))
       );
+      setBookmarks(filtered);
     }
 
-    // 🔹 Arama filtresi
     if (search) {
       filtered = filtered.filter((bm) =>
         bm.title.toLowerCase().includes(search)
       );
+      setBookmarks(filtered);
     }
-
-    setBookmarks(filtered);
   }, [tags, searchInput, allBookmarks]);
 
   console.log(allBookmarks, "allbookmarks");
   console.log(bookmarks, "bookmarks");
-  console.log(tags);
+  // console.log(bookmark, "bookmark");
 
   return (
     <BookmarkContext.Provider
