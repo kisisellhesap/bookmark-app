@@ -9,11 +9,7 @@ import {
   useEffect,
 } from "react";
 import { Bookmark } from "../types";
-import {
-  getBookmarksMethod,
-  getUsersMethod,
-  userIsAdmin,
-} from "../firebase/allMethod";
+import { getBookmarksMethod } from "../firebase/allMethod";
 import { useFilter } from "./FilterContext";
 import { useRouter } from "next/navigation";
 
@@ -66,7 +62,6 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
       }
     });
 
-    // Cleanup: bileşen unmount olunca dinlemeyi durdur
     return () => unsubscribe();
   }, []);
 
@@ -83,15 +78,14 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
       filtered = filtered.filter((bm) =>
         selectedTags.every((sel) => bm.tags.includes(sel.text))
       );
-      setBookmarks(filtered);
     }
 
     if (search) {
       filtered = filtered.filter((bm) =>
         bm.title.toLowerCase().includes(search)
       );
-      setBookmarks(filtered);
     }
+    setBookmarks(filtered);
   }, [tags, searchInput, allBookmarks]);
 
   console.log(allBookmarks, "allbookmarks");

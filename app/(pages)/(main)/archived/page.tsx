@@ -11,14 +11,14 @@ import { useEffect } from "react";
 
 const Archived = () => {
   const { resetFilters } = useFilter();
-  const { allBookmarks, loading } = useBookmark();
+  const { bookmarks, loading } = useBookmark();
 
   useEffect(() => {
     return () => {
       resetFilters();
     };
   }, []);
-  const filteredData = allBookmarks?.filter((bookmark) =>
+  const filteredData = bookmarks?.filter((bookmark) =>
     bookmark.whoArchived.includes(auth.currentUser?.uid ?? "")
   );
   console.log(filteredData);

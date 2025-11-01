@@ -11,8 +11,8 @@ import { motion } from "framer-motion";
 import { auth } from "@/app/firebase";
 const Profile = () => {
   const { resetFilters } = useFilter();
-  const { allBookmarks, loading } = useBookmark();
-  const filteredData = allBookmarks?.filter(
+  const { bookmarks, loading } = useBookmark();
+  const filteredData = bookmarks?.filter(
     (bookmark) => bookmark.whoCreated === auth.currentUser?.uid
   );
   useEffect(() => {

@@ -5,18 +5,18 @@ import LoadingComponent from "@/app/components/main/loadingComponent";
 import PageHeader from "@/app/components/main/pageHeader";
 import { useBookmark } from "@/app/context/BookmarkContext";
 import { useFilter } from "@/app/context/FilterContext";
-import { getUsersMethod, userIsAdmin } from "@/app/firebase/allMethod";
+import { userIsAdmin } from "@/app/firebase/allMethod";
 import { Bookmark } from "@/app/types";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const Home = () => {
   const { resetFilters } = useFilter();
-  const { allBookmarks, bookmarks, setBookmarks, loading } = useBookmark();
+  const { bookmarks, loading } = useBookmark();
 
   const [adminData, setAdminData] = useState<Bookmark[] | null>(bookmarks);
   const a = async () => {
-    const a = await userIsAdmin(allBookmarks ?? []);
+    const a = await userIsAdmin(bookmarks ?? []);
     setAdminData(a);
   };
   a();
