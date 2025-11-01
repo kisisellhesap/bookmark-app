@@ -8,7 +8,7 @@ import FormInput from "../form-component/form-input";
 import FormLinkText from "../form-component/form-link-text";
 import FormPasswordInput from "../form-component/form-password-input";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { signInMethod } from "@/app/firebase/auth";
+import { signInMethod } from "@/app/firebase/allMethod";
 
 const SignInForm = () => {
   const initialStateForm: SignInTypeForm = {

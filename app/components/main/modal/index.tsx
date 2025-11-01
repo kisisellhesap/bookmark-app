@@ -1,10 +1,24 @@
 import { useModal } from "@/app/context/ModalContext";
 import AreYouShureModal from "./areYouShure-modal";
 import AddEditModal from "./addEdit-modal";
+import { addArchiveMethod } from "@/app/firebase/allMethod";
+import { useBookmark } from "@/app/context/BookmarkContext";
+import { auth } from "@/app/firebase";
+import toast from "react-hot-toast";
 
 const Modal = () => {
   const { isActive, setIsActive, type } = useModal();
-
+  const { bookmark } = useBookmark();
+  const handleArchiveAdd = () => {
+    try {
+      if (bookmark) {
+        addArchiveMethod(bookmark, auth.currentUser?.uid ?? "");
+        toast.success("bookmark archive added");
+      }
+    } catch (error: any) {
+      toast.error(error.message);
+    }
+  };
   return (
     <div
       onClick={() => setIsActive(false)}
@@ -18,6 +32,7 @@ const Modal = () => {
           title="Archive bookmark"
           text="Are you sure you want to archive this bookmark?"
           btnText="Archive"
+          onClick={handleArchiveAdd}
         />
       ) : type === "delete" ? (
         <AreYouShureModal

@@ -1,3 +1,5 @@
+import { tagsInitialState } from "@/app/constant/tags";
+import { useBookmark } from "@/app/context/BookmarkContext";
 import { useFilter } from "@/app/context/FilterContext";
 import { AsideTag } from "@/app/types";
 import { FaCheck } from "react-icons/fa";
@@ -6,7 +8,13 @@ interface TagBtnProps {
   tag: AsideTag;
 }
 const TagBtn = ({ tag }: TagBtnProps) => {
+  const { allBookmarks } = useBookmark();
+
   const { toggleTag } = useFilter();
+  const countTag = allBookmarks?.filter((bookmark) =>
+    bookmark.tags.includes(tag.text)
+  );
+  console.log(countTag);
 
   return (
     <div
@@ -22,7 +30,7 @@ const TagBtn = ({ tag }: TagBtnProps) => {
       </div>
       <span className="">{tag.text}</span>
       <div className="ml-auto bg-Neutral-100 border border-transparent group-hover:border-Neutral-500  dark:border-Neutral-500-d dark:bg-Neutral-600-d px-2 py-0.5 radius-full text-preset-5">
-        3
+        {countTag?.length}
       </div>
     </div>
   );

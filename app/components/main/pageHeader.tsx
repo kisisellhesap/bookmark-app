@@ -13,14 +13,14 @@ const PageHeader = ({ title }: PageHeaderProps) => {
       <p className="text-preset-1 text-Neutral-900 dark:text-Neutral-0-d">
         {title}
       </p>
-      <Button
+      {/* <Button
         icon={<HiOutlineSwitchVertical className="icon-size" />}
         type="button"
         text="Sort by"
         customStyle="btn-sm btn-secondary-sm-light btn-secondary-sm-dark text-preset-3 p-2 custom-outline w-fit"
         onClick={() => setDropDown(!dropdown)}
       />
-      <FilterBtnDropDown dropdown={dropdown} setDropDown={setDropDown} />
+      <FilterBtnDropDown dropdown={dropdown} setDropDown={setDropDown} /> */}
     </div>
   );
 };

@@ -9,16 +9,18 @@ import { useState } from "react";
 import OpenBtn from "../../open-btn";
 import { Bookmark } from "@/app/types";
 import moment from "moment";
+import { useBookmark } from "@/app/context/BookmarkContext";
 
 interface BookmarkCardProps {
   bookmark: Bookmark;
 }
 const BookmarkCard = ({ bookmark }: BookmarkCardProps) => {
   const [dropdown, setDropDown] = useState<boolean>(false);
+  const { setBookmark } = useBookmark();
 
   return (
-    <div className="bg-Neutral-0 dark:bg-Neutral-800-d radius-12 shadow-1  relative">
-      <div className="flex flex-col gap-4 p-4">
+    <div className="bg-Neutral-0 dark:bg-Neutral-800-d radius-12 shadow-1  flex flex-col relative">
+      <div className="flex flex-col gap-4  p-4 flex-1">
         <div className="flex gap-3">
           <Image
             src={bookmark.favicon}
@@ -39,24 +41,29 @@ const BookmarkCard = ({ bookmark }: BookmarkCardProps) => {
           <OpenBtn
             icon={<BsThreeDotsVertical className="icon-size" />}
             responsive="w-[32px] h-[32px] ml-auto custom-outline"
-            onClick={() => setDropDown(!dropdown)}
+            onClick={() => {
+              setDropDown(!dropdown);
+              setBookmark(bookmark);
+            }}
           />
         </div>
 
         <hr className="text-Neutral-300 dark:text-Neutral-500-d h-px" />
 
-        <p className="text-preset-4-medium text-Neutral-800 dark:text-Neutral-100-d">
-          {bookmark.description}.
-        </p>
-        <div className="flex gap-2 ">
-          {bookmark.tags.map((tag, i) => (
-            <span
-              key={i}
-              className="px-2 py-0.5 radius-4 bg-Neutral-100 dark:bg-Neutral-600-d text-Neutral-800 dark:text-Neutral-100-d text-preset-5 shadow-1"
-            >
-              {tag}
-            </span>
-          ))}
+        <div className="flex flex-col gap-4  flex-1 justify-between">
+          <p className="text-preset-4-medium text-Neutral-800 dark:text-Neutral-100-d">
+            {bookmark.description}
+          </p>
+          <div className="flex gap-2 ">
+            {bookmark.tags.map((tag, i) => (
+              <span
+                key={i}
+                className="px-2 py-0.5 radius-4 bg-Neutral-100 dark:bg-Neutral-600-d text-Neutral-800 dark:text-Neutral-100-d text-preset-5 shadow-1"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -85,7 +92,7 @@ const BookmarkCard = ({ bookmark }: BookmarkCardProps) => {
       <BookmarkDropdown
         dropdown={dropdown}
         setDropDown={setDropDown}
-        copyUrl={"frontendmentor.io"}
+        bookmark={bookmark}
       />
     </div>
   );

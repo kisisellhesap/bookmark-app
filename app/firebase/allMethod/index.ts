@@ -8,7 +8,14 @@ import {
 import { auth, db } from "..";
 import { Bookmark, SignInTypeForm, SignUpTypeForm, User } from "@/app/types";
 import toast from "react-hot-toast";
-import { collection, doc, getDocs, setDoc } from "firebase/firestore";
+import {
+  arrayUnion,
+  collection,
+  doc,
+  getDocs,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 
 export const signUpMethod = async (form: SignUpTypeForm) => {
   try {
@@ -126,4 +133,14 @@ export const userIsAdmin = (
   return bookmarks.filter((bookmark) =>
     adminUids.includes(bookmark.whoCreated ?? "")
   );
+};
+
+export const addArchiveMethod = async (bookmark: Bookmark, userId: string) => {
+  const bookmarksRef = doc(db, "bookmarks", bookmark.uid);
+
+  await updateDoc(bookmarksRef, {
+    ...bookmark,
+    isArchived: true,
+    whoArchived: arrayUnion(userId),
+  });
 };

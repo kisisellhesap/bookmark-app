@@ -2,14 +2,22 @@ import { FaXmark } from "react-icons/fa6";
 import Button from "../../button";
 import CloseBtn from "../../close-btn";
 import { useModal } from "@/app/context/ModalContext";
+import { useBookmark } from "@/app/context/BookmarkContext";
 
 interface AreYouShureModalProps {
   title: string;
   text: string;
   btnText: string;
+  onClick?: () => void;
 }
-const AreYouShureModal = ({ title, text, btnText }: AreYouShureModalProps) => {
+const AreYouShureModal = ({
+  title,
+  text,
+  btnText,
+  onClick,
+}: AreYouShureModalProps) => {
   const { setIsActive } = useModal();
+  const { setBookmark } = useBookmark();
 
   return (
     <div
@@ -35,7 +43,10 @@ const AreYouShureModal = ({ title, text, btnText }: AreYouShureModalProps) => {
           type="button"
           text="Cancel"
           customStyle="btn-sm btn-secondary-sm-light btn-secondary-sm-dark text-preset-3 p-2 custom-outline w-fit"
-          onClick={() => setIsActive(false)}
+          onClick={() => {
+            setIsActive(false);
+            setBookmark(null);
+          }}
         />
         <Button
           type="button"
@@ -45,6 +56,7 @@ const AreYouShureModal = ({ title, text, btnText }: AreYouShureModalProps) => {
               ? "btn-primary-sm-red custom-outline-red"
               : "btn-primary-sm-light custom-outline"
           }  text-preset-3 `}
+          onClick={onClick}
         />
       </div>
     </div>

@@ -34,7 +34,11 @@ export interface Bookmark {
   description: string;
   tags: string[];
   pinned: boolean;
+  whoPinned: string[];
+
   isArchived: boolean;
+  whoArchived: string[];
+
   visitCount: number;
   createdAt: Timestamp | null;
   lastVisited: Timestamp | null;

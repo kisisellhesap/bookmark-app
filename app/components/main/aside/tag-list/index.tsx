@@ -4,6 +4,7 @@ import TagBtn from "./tag-btn";
 
 const TagList = () => {
   const { tags, resetTags } = useFilter();
+
   return (
     <div className="tag-wrapper px-4">
       <div className="flex justify-between items-center text-Neutral-500">

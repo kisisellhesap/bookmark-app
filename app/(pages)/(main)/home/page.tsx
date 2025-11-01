@@ -1,40 +1,24 @@
 "use client";
+import EmptyComponent from "@/app/components/emptyComponent";
 import BookmarkCard from "@/app/components/main/bookmark-card";
+import LoadingComponent from "@/app/components/main/loadingComponent";
 import PageHeader from "@/app/components/main/pageHeader";
+import { useBookmark } from "@/app/context/BookmarkContext";
 import { useFilter } from "@/app/context/FilterContext";
-import {
-  getBookmarksMethod,
-  getUsersMethod,
-  userIsAdmin,
-} from "@/app/firebase/auth";
-import { Bookmark } from "@/app/types";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const Home = () => {
   const { resetFilters } = useFilter();
-  const [bookmarks, setBookmarks] = useState<Bookmark[] | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const { bookmarks, setBookmarks, loading } = useBookmark();
+
   useEffect(() => {
-    const getBookmark = async () => {
-      const bookmarks = await getBookmarksMethod();
-      const users = await getUsersMethod();
-      const adminBookmarks = userIsAdmin(bookmarks, users);
-      setBookmarks(adminBookmarks);
-      setLoading(false);
-    };
-    getBookmark();
-
     return () => {
-      getBookmark();
-
       resetFilters();
     };
   }, []);
 
-  console.log(bookmarks, "bookmarks");
-
-  if (loading) return <div>loading</div>;
+  if (loading) return <LoadingComponent />;
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -45,11 +29,17 @@ const Home = () => {
     >
       <PageHeader title="All bookmarks" />
 
-      <div className=" grid grid-cols-[338px_338px_338px] gap-8 max-xl:grid-cols-2 max-md:grid-cols-1">
-        {bookmarks?.map((bookmark, i) => (
-          <BookmarkCard key={i} bookmark={bookmark} />
-        ))}
-      </div>
+      {bookmarks?.length === 0 ? (
+        <div className="grid place-items-center h-[500px] ">
+          <EmptyComponent />
+        </div>
+      ) : (
+        <div className=" grid grid-cols-[338px_338px_338px] gap-8 max-xl:grid-cols-2 max-md:grid-cols-1">
+          {bookmarks?.map((bookmark, i) => (
+            <BookmarkCard key={i} bookmark={bookmark} />
+          ))}
+        </div>
+      )}
     </motion.div>
   );
 };

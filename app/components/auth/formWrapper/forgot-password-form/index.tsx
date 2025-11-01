@@ -5,7 +5,7 @@ import FormBtn from "../form-component/form-btn";
 import FormHeader from "../form-component/form-header";
 import FormInput from "../form-component/form-input";
 import FormLinkText from "../form-component/form-link-text";
-import { passwordResetEmailMethod } from "@/app/firebase/auth";
+import { passwordResetEmailMethod } from "@/app/firebase/allMethod";
 import toast from "react-hot-toast";
 
 const ForgotPasswordForm = () => {

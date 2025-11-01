@@ -1,6 +1,6 @@
 import Button from "@/app/components/button";
 import { ThemeToggle } from "@/app/components/ThemeToggle";
-import { signOutMethod } from "@/app/firebase/auth";
+import { signOutMethod } from "@/app/firebase/allMethod";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { redirect } from "next/navigation";
