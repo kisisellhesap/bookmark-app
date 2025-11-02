@@ -40,7 +40,7 @@ const ModalTags = () => {
           </button>
         </div>
 
-        <div className=" flex gap-2 radius-8 py-4 overflow-x-auto">
+        <div className=" flex gap-2 radius-8 py-4 overflow-x-auto ">
           {activeTags.length === 0 ? (
             <span
               className={` px-2 py-1 radius-4  text-preset-5 shadow-1 ${
@@ -74,7 +74,7 @@ const ModalTags = () => {
         </div>
       </div>
 
-      <div className="flex gap-2 flex-wrap">
+      <div className="flex gap-2 flex-wrap  max-sm:mt-5">
         {tags.map((tag, i) => (
           <div
             key={i}

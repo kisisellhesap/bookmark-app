@@ -15,12 +15,13 @@ const Home = () => {
   const { bookmarks, loading } = useBookmark();
 
   const [adminData, setAdminData] = useState<Bookmark[] | null>(bookmarks);
-  const a = async () => {
-    const a = await userIsAdmin(bookmarks ?? []);
-    setAdminData(a);
-  };
-  a();
+
   useEffect(() => {
+    const a = async () => {
+      const a = await userIsAdmin(bookmarks ?? []);
+      setAdminData(a);
+    };
+    a();
     return () => {
       resetFilters();
     };

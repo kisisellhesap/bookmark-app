@@ -31,7 +31,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
     return () => unsubscribe();
   }, []);
-  console.log(user, "user");
+  // console.log(user, "user");
 
   return (
     <UserContext.Provider value={{ user, setUser, loading }}>

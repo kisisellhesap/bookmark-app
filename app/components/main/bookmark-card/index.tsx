@@ -10,6 +10,7 @@ import OpenBtn from "../../open-btn";
 import { Bookmark } from "@/app/types";
 import moment from "moment";
 import { useBookmark } from "@/app/context/BookmarkContext";
+import { FaBookmark } from "react-icons/fa";
 
 interface BookmarkCardProps {
   bookmark: Bookmark;
@@ -31,7 +32,9 @@ const BookmarkCard = ({ bookmark }: BookmarkCardProps) => {
               className=" shadow-1 radius-full bg-Neutral-0 border-0 outline-2 -outline-offset-1 outline-Neutral-100 dark:outline-Neutral-500-d"
             />
           ) : (
-            <div className=" shadow-1 radius-full bg-Neutral-0 border-0 outline-2 -outline-offset-1 outline-Neutral-100 dark:outline-Neutral-500-d w-11 h-11"></div>
+            <div className=" shadow-1 radius-full bg-Neutral-0 dark:bg-Neutral-400-d border-0 outline-2 -outline-offset-1 outline-Neutral-100 dark:outline-Neutral-500-d w-11 h-11 flex items-center justify-center">
+              <FaBookmark className="icon-size text-Teal-700 dark:text-Neutral-0-d" />
+            </div>
           )}
           <div className="flex flex-col">
             <p className="text-preset-2 text-Neutral-900 dark:text-Neutral-0-d">

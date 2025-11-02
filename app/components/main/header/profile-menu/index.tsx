@@ -1,5 +1,6 @@
 import Button from "@/app/components/button";
 import { ThemeToggle } from "@/app/components/ThemeToggle";
+import { useFilter } from "@/app/context/FilterContext";
 import { signOutMethod } from "@/app/firebase/allMethod";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
@@ -10,8 +11,10 @@ interface ProfileMenuProps {
   dropdown: boolean;
 }
 const ProfileMenu = ({ dropdown }: ProfileMenuProps) => {
+  const { resetTags } = useFilter();
   const handleLogout = () => {
     signOutMethod();
+    resetTags();
   };
   return (
     <AnimatePresence>

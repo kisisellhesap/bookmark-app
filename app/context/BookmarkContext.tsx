@@ -76,7 +76,7 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
     // 🔹 Tag filtresi
     if (selectedTags.length > 0) {
       filtered = filtered.filter((bm) =>
-        selectedTags.every((sel) => bm.tags.includes(sel.text))
+        selectedTags.some((sel) => bm.tags.includes(sel.text))
       );
     }
 
@@ -88,8 +88,8 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
     setBookmarks(filtered);
   }, [tags, searchInput, allBookmarks]);
 
-  console.log(allBookmarks, "allbookmarks");
-  console.log(bookmarks, "bookmarks");
+  // console.log(allBookmarks, "allbookmarks");
+  // console.log(bookmarks, "bookmarks");
   // console.log(bookmark, "bookmark");
 
   return (

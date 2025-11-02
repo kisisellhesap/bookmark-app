@@ -71,7 +71,7 @@ const AddEditModal = ({ title, text, btnText }: AddEditModalProps) => {
         whoCreated: uid,
       };
 
-      console.log(filterBookmark);
+      // console.log(filterBookmark);
       if (type === "add") {
         addBookmarkMethod(filterBookmark);
         toast.success("bookmark added successfully");
@@ -99,11 +99,11 @@ const AddEditModal = ({ title, text, btnText }: AddEditModalProps) => {
       toast.error("Please add a tag");
     }
   };
-  console.log(form, "form");
+  // console.log(form, "form");
 
   return (
     <div
-      className="p-8 radius-16 shadow-1 flex flex-col gap-8 bg-Neutral-0 dark:bg-Neutral-800-d relative w-full max-w-[570px]"
+      className="p-8 radius-16 shadow-1 flex flex-col gap-8 bg-Neutral-0 dark:bg-Neutral-800-d relative w-full max-w-[570px] min-w-[370px] max-sm:h-full max-sm:rounded-none "
       onClick={(e) => e.stopPropagation()}
     >
       <CloseBtn
@@ -125,7 +125,7 @@ const AddEditModal = ({ title, text, btnText }: AddEditModalProps) => {
       </div>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-5  overflow-y-auto h-[550px] pr-6 py-2"
+        className="flex flex-col gap-5  overflow-y-auto h-[550px] max-sm:h-[620px]   pr-6 py-2"
       >
         <FormInput
           label="Title *"

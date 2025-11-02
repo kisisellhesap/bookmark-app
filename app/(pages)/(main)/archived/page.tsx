@@ -21,7 +21,6 @@ const Archived = () => {
   const filteredData = bookmarks?.filter((bookmark) =>
     bookmark.whoArchived.includes(auth.currentUser?.uid ?? "")
   );
-  console.log(filteredData);
 
   if (loading) return <LoadingComponent />;
 
