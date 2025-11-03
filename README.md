@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🔖 Bookmark App
 
-## Getting Started
+- A modern bookmark management application built with **Next.js**, **React**, and **Firebase**.
+- Save, organize, and filter your bookmarks — with role-based (admin/user) access control.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+📚 **Full CRUD Functionality**  
+Add, edit, delete, and view bookmarks easily.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+🧭 **Filtering System**  
+Filter bookmarks by tag, user, or category.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+👑 **Admin Access**  
+Admins can view all bookmarks; users see only their own.
 
-## Learn More
+🔐 **Firebase Integration**  
+Authentication, Firestore database, and real-time updates.
 
-To learn more about Next.js, take a look at the following resources:
+🎨 **Modern UI**  
+Responsive and elegant interface with **TailwindCSS** and **Framer Motion** animations.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+🕒 **Smart Time Formatting**  
+Powered by **Moment.js** for displaying creation and update times.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ⚡ Tech Stack
 
-## Deploy on Vercel
+- **Next.js 16** – React framework
+- **React 19** – UI library
+- **Firebase** – Auth & Firestore database
+- **TailwindCSS** – Styling
+- **Framer Motion** – Animations
+- **Moment.js** – Time formatting
+- **React Hot Toast** – Notifications
+- **UUID** – Unique ID generation
+- **Next Themes** – Dark/Light theme support
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🧩 Project Highlights
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Real-time bookmark synchronization with Firestore
+- Clean and minimalistic UI
+- Role-based rendering (Admin vs. User)
+- Fully responsive for all screen sizes
+
+---
+
+Live:https://bookmark-app-eta.vercel.app
+Github:https://github.com/kisisellhesap/bookmark-app
+
+![](bookmark.gif)
