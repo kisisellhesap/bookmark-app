@@ -11,7 +11,7 @@ import {
   Form,
   SignInTypeForm,
   SignUpTypeForm,
-  User,
+  UserType,
 } from "@/app/types";
 import toast from "react-hot-toast";
 import {
@@ -37,7 +37,7 @@ export const signUpMethod = async (form: SignUpTypeForm) => {
     if (!result.user.displayName) {
       await updateProfile(result.user, { displayName: form.fullname });
     }
-    const user: User = {
+    const user: UserType = {
       uid: result.user.uid,
       displayName: result.user.displayName,
       email: result.user.email,
@@ -86,7 +86,7 @@ export const passwordResetEmailMethod = (email: string) => {
     });
 };
 
-export const addUserMethod = async (user: User) => {
+export const addUserMethod = async (user: UserType) => {
   await setDoc(doc(db, "users", user.uid), user);
 };
 
@@ -121,12 +121,12 @@ export const getBookmarksMethod = (callback: (data: Bookmark[]) => void) => {
 export const getUsersMethod = async () => {
   const col = collection(db, "users");
   const querySnapshot = await getDocs(col);
-  let temp: User[] = [];
+  let temp: UserType[] = [];
   querySnapshot.forEach((doc) => {
     const user = {
       uid: doc.id,
       ...doc.data(),
-    } as User;
+    } as UserType;
     temp.push(user);
   });
 
@@ -137,13 +137,18 @@ export const userIsAdmin = async (
   bookmarks: Bookmark[]
 ): Promise<Bookmark[]> => {
   const users = await getUsersMethod();
+  // console.log(users);
   const adminUids = users
     .filter((user) => user.role === "admin")
     .map((user) => user.uid);
+  // console.log(adminUids);
 
-  return bookmarks.filter((bookmark) =>
+  const filtered = bookmarks.filter((bookmark) =>
     adminUids.includes(bookmark.whoCreated ?? "")
   );
+  // console.log(filtered);
+
+  return filtered;
 };
 
 export const addArchiveMethod = async (bookmark: Bookmark, userId: string) => {

@@ -1,10 +1,10 @@
 import Button from "@/app/components/button";
 import { ThemeToggle } from "@/app/components/ThemeToggle";
 import { useFilter } from "@/app/context/FilterContext";
+import { auth } from "@/app/firebase";
 import { signOutMethod } from "@/app/firebase/allMethod";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import { redirect } from "next/navigation";
 import { IoColorPaletteOutline } from "react-icons/io5";
 import { LuLogOut } from "react-icons/lu";
 interface ProfileMenuProps {
@@ -34,12 +34,12 @@ const ProfileMenu = ({ dropdown }: ProfileMenuProps) => {
               height={40}
               className="radius-full"
             />
-            <div className="flex flex-col">
+            <div className="flex flex-col line-clamp-1">
               <p className="text-preset-4 text-Neutral-900 dark:text-Neutral-0-d">
-                Emily Carter
+                {auth.currentUser?.displayName}
               </p>
-              <p className="text-preset-4-medium text-Neutral-800 dark:text-Neutral-100-d">
-                emily101@gmail.com
+              <p className="text-[.6rem] text-Neutral-800 dark:text-Neutral-100-d ">
+                {auth.currentUser?.email}
               </p>
             </div>
           </div>

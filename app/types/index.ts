@@ -45,7 +45,7 @@ export interface Bookmark {
   whoCreated: string | undefined;
 }
 
-export interface User {
+export interface UserType {
   uid: string;
   displayName: string | null;
   email: string | null;

@@ -14,18 +14,22 @@ const Home = () => {
   const { resetFilters } = useFilter();
   const { bookmarks, loading } = useBookmark();
 
-  const [adminData, setAdminData] = useState<Bookmark[] | null>(bookmarks);
+  const [adminData, setAdminData] = useState<Bookmark[] | null>(null);
 
   useEffect(() => {
-    const a = async () => {
-      const a = await userIsAdmin(bookmarks ?? []);
-      setAdminData(a);
+    const fetchAdminData = async () => {
+      if (!bookmarks) return;
+
+      const data = await userIsAdmin(bookmarks);
+      setAdminData(data);
     };
-    a();
+
+    fetchAdminData();
+
     return () => {
       resetFilters();
     };
-  }, []);
+  }, [bookmarks]);
 
   if (loading) return <LoadingComponent />;
   return (
@@ -38,13 +42,15 @@ const Home = () => {
     >
       <PageHeader title="All bookmarks" />
 
-      {adminData?.length === 0 ? (
+      {adminData === null ? (
+        <LoadingComponent />
+      ) : adminData.length === 0 ? (
         <div className="grid place-items-center h-[500px] ">
           <EmptyComponent />
         </div>
       ) : (
-        <div className=" grid grid-cols-[338px_338px_338px] gap-8 max-xl:grid-cols-2 max-md:grid-cols-1">
-          {adminData?.map((bookmark, i) => (
+        <div className="grid grid-cols-[338px_338px_338px] gap-8 max-xl:grid-cols-2 max-md:grid-cols-1">
+          {adminData.map((bookmark, i) => (
             <BookmarkCard key={i} bookmark={bookmark} />
           ))}
         </div>

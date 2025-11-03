@@ -10,11 +10,15 @@ import {
   SetStateAction,
 } from "react";
 import { auth } from "../firebase";
+import { getUsersMethod } from "../firebase/allMethod";
+import { UserType } from "../types";
 
 interface UserContextType {
   user: User | null;
   setUser: Dispatch<SetStateAction<User | null>>;
   loading: boolean;
+  users: UserType[] | null;
+  setUsers: Dispatch<SetStateAction<UserType[] | null>>;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -22,6 +26,7 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setloading] = useState<boolean>(true);
+  const [users, setUsers] = useState<UserType[] | null>(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -31,10 +36,18 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
     return () => unsubscribe();
   }, []);
-  // console.log(user, "user");
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const usersFetch = await getUsersMethod();
+      setUsers(usersFetch);
+    };
+
+    getUsers();
+  }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser, loading }}>
+    <UserContext.Provider value={{ user, setUser, loading, users, setUsers }}>
       {children}
     </UserContext.Provider>
   );
